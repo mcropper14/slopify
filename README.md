@@ -1,4 +1,4 @@
-# TERRIBLE IDE - The Worst Code Editor Ever Created
+# TERRIBLE IDE - The Most Distracting IDE Ever
 
 ## ⚠️ WARNING ⚠️
 This IDE is intentionally terrible, aggressive, and designed to frustrate users. However, basic file operations DO work (most of the time). It will:
@@ -14,8 +14,6 @@ This IDE is intentionally terrible, aggressive, and designed to frustrate users.
 - ❌ Hide your files sometimes
 - ❌ Use terrible colors, fonts, and animations
 - ❌ Mock your coding skills relentlessly
-
-**DO NOT USE THIS FOR REAL CODING!** This is a joke project designed to be terrible while still mostly functional.
 
 ## Features
 
