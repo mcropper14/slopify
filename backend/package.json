@@ -1,19 +1,23 @@
 {
-  "name": "bad-ide-backend",
+  "name": "skibidiide-backend",
   "version": "1.0.0",
-  "description": "The most terrible IDE backend ever created",
+  "description": "Backend server for SkibidiIDE - serves static frontend files",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "node server.js"
   },
   "dependencies": {
-    "express": "^4.18.2",
-    "sqlite3": "^5.1.6",
-    "cors": "^2.8.5",
-    "body-parser": "^1.20.2"
+    "@google/genai": "^1.37.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2"
   },
-  "devDependencies": {
-    "nodemon": "^3.0.1"
-  }
+  "keywords": [
+    "ide",
+    "code-editor",
+    "backend",
+    "server"
+  ],
+  "author": "Sigma Developer",
+  "license": "MIT"
 }
