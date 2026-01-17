@@ -1,0 +1,584 @@
+/* The most terrible CSS ever written */
+
+.app {
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  min-height: 100vh;
+  transition: all 2s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.app::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(255, 0, 0, 0.1),
+    rgba(255, 0, 0, 0.1) 10px,
+    rgba(0, 255, 0, 0.1) 10px,
+    rgba(0, 255, 0, 0.1) 20px
+  );
+  pointer-events: none;
+  z-index: -1;
+}
+
+.header {
+  background: linear-gradient(45deg, #ff0000, #00ff00, #0000ff, #ff00ff);
+  background-size: 400% 400%;
+  animation: rainbow 3s ease infinite;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+@keyframes rainbow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 2.5em;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  animation: shake 0.5s infinite;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.header-buttons {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.terrible-btn {
+  background: #ff4444;
+  color: white;
+  border: 3px solid #000;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 0;
+  text-transform: uppercase;
+  transition: all 0.3s;
+  box-shadow: 0 0 10px rgba(255,0,0,0.5);
+}
+
+.terrible-btn:hover {
+  background: #ff6666;
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 0 20px rgba(255,0,0,0.8);
+}
+
+.terrible-btn.danger {
+  background: #ff0000;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.insult-banner {
+  background: #ff0000;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  animation: blink 1s infinite;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0.7; }
+}
+
+.main-content {
+  display: flex;
+  height: calc(100vh - 150px);
+  gap: 10px;
+}
+
+.sidebar {
+  width: 300px;
+  background: #333;
+  color: white;
+  padding: 20px;
+  overflow-y: auto;
+  border-right: 5px solid #ff0000;
+}
+
+.sidebar h3 {
+  margin-top: 0;
+  color: #ff6666;
+  text-decoration: underline;
+  text-decoration-color: #00ff00;
+  text-decoration-style: wavy;
+}
+
+.file-list {
+  margin-top: 20px;
+}
+
+.file-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin: 5px 0;
+  background: #555;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.file-item:hover {
+  background: #777;
+  transform: translateX(10px);
+}
+
+.file-name {
+  flex-grow: 1;
+  cursor: pointer;
+}
+
+.file-name.corrupted {
+  color: #ff0000;
+  text-decoration: line-through;
+  animation: corrupted 0.5s infinite;
+}
+
+@keyframes corrupted {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.delete-btn {
+  background: #ff0000;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 16px;
+}
+
+.delete-btn:hover {
+  background: #cc0000;
+  transform: scale(1.2);
+}
+
+.editor-container {
+  flex-grow: 1;
+  padding: 20px;
+  background: #f0f0f0;
+  position: relative;
+}
+
+.editor-container h3 {
+  margin-top: 0;
+  color: #333;
+  font-family: 'Impact', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.editor-and-output {
+  display: flex;
+  flex-direction: column;
+  height: 70vh;
+  gap: 10px;
+}
+
+.editor-section {
+  flex: 2;
+}
+
+.output-section {
+  flex: 1;
+  background: #1e1e1e;
+  border: 3px solid #ff0000;
+  border-radius: 5px;
+  padding: 10px;
+  color: #00ff00;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  overflow-y: auto;
+}
+
+.output-section h4 {
+  margin: 0 0 10px 0;
+  color: #ff6666;
+  font-family: 'Impact', sans-serif;
+  text-transform: uppercase;
+  font-size: 16px;
+}
+
+.output-console {
+  background: #000;
+  border: 2px solid #333;
+  border-radius: 3px;
+  padding: 10px;
+  min-height: 100px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-size: 12px;
+  line-height: 1.4;
+  animation: output-glow 2s infinite alternate;
+}
+
+@keyframes output-glow {
+  0% { box-shadow: 0 0 5px rgba(0, 255, 0, 0.3); }
+  100% { box-shadow: 0 0 20px rgba(0, 255, 0, 0.6); }
+}
+
+/* YouTube Shorts - THE MOST DISTRACTING FEATURE */
+.youtube-shorts-panel {
+  width: 350px;
+  background: linear-gradient(45deg, #ff0000, #ff4444, #ff6666);
+  border: 5px solid #000;
+  border-radius: 15px;
+  padding: 15px;
+  color: white;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(255, 0, 0, 0.8);
+  animation: shorts-pulse 2s infinite alternate;
+}
+
+@keyframes shorts-pulse {
+  0% {
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.8);
+    transform: scale(1);
+  }
+  100% {
+    box-shadow: 0 0 50px rgba(255, 0, 0, 1);
+    transform: scale(1.02);
+  }
+}
+
+.youtube-shorts-panel h3 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+  animation: shorts-shake 1s infinite;
+}
+
+@keyframes shorts-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-3px) rotate(-2deg); }
+  75% { transform: translateX(3px) rotate(2deg); }
+}
+
+.shorts-warning {
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px 0;
+  border: 2px solid #ffff00;
+}
+
+.shorts-warning p {
+  margin: 5px 0;
+  font-size: 12px;
+  font-weight: bold;
+  color: #ffff00;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+}
+
+.youtube-player {
+  margin: 15px 0;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 3px solid #000;
+  box-shadow: 0 0 20px rgba(0,0,0,0.8);
+}
+
+.youtube-player iframe {
+  border-radius: 7px;
+}
+
+.video-error {
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(45deg, #ff0000, #ff4444);
+  border-radius: 10px;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  animation: error-pulse 1s infinite alternate;
+}
+
+@keyframes error-pulse {
+  0% { background: linear-gradient(45deg, #ff0000, #ff4444); }
+  100% { background: linear-gradient(45deg, #ff4444, #ff6666); }
+}
+
+.video-error p {
+  margin: 10px 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.video-error a {
+  margin: 10px 0;
+  text-decoration: none;
+}
+
+.video-error a:hover {
+  text-decoration: underline;
+}
+
+.shorts-controls {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.terrible-btn.small {
+  padding: 8px 15px;
+  font-size: 12px;
+  min-width: auto;
+}
+
+.no-file {
+  text-align: center;
+  padding-top: 100px;
+  color: #666;
+}
+
+.no-file h3 {
+  font-size: 2em;
+  color: #ff0000;
+}
+
+.no-file p {
+  font-size: 1.2em;
+  margin: 10px 0;
+}
+
+/* Terrible layout modes */
+.chaos-layout {
+  flex-direction: column-reverse !important;
+}
+
+.chaos-layout .main-content {
+  flex-direction: row-reverse;
+}
+
+.chaos-layout .youtube-shorts-panel {
+  order: -1; /* Put shorts at the top in chaos mode */
+}
+
+.upside-down {
+  transform: rotate(180deg);
+}
+
+.tiny-text {
+  font-size: 10px;
+}
+
+.tiny-text .terrible-btn {
+  font-size: 8px;
+  padding: 5px 10px;
+}
+
+.huge-text {
+  font-size: 24px;
+}
+
+.huge-text .terrible-btn {
+  font-size: 32px;
+  padding: 20px 40px;
+}
+
+/* Popup ads - the worst part */
+.ad-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  animation: ad-appear 0.5s ease-out;
+}
+
+@keyframes ad-appear {
+  0% { opacity: 0; transform: scale(0.5); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.ad-modal {
+  background: linear-gradient(45deg, #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff);
+  background-size: 600% 600%;
+  animation: ad-rainbow 2s ease infinite;
+  padding: 40px;
+  border-radius: 20px;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0 0 50px rgba(255, 255, 255, 0.5);
+  border: 10px solid #000;
+}
+
+@keyframes ad-rainbow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.ad-content h2 {
+  color: white;
+  font-size: 2.5em;
+  margin: 0 0 20px 0;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+  animation: ad-shake 0.5s infinite;
+}
+
+@keyframes ad-shake {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  25% { transform: translateX(-10px) rotate(-5deg); }
+  75% { transform: translateX(10px) rotate(5deg); }
+}
+
+.ad-content p {
+  color: white;
+  font-size: 1.5em;
+  margin: 20px 0;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+}
+
+.ad-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.ad-btn {
+  padding: 15px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  border: 3px solid #000;
+  border-radius: 10px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.3s;
+  min-width: 150px;
+}
+
+.ad-btn.primary {
+  background: #00ff00;
+  color: #000;
+}
+
+.ad-btn.primary:hover {
+  background: #00cc00;
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(0,255,0,0.8);
+}
+
+.ad-btn.secondary {
+  background: #ffff00;
+  color: #000;
+}
+
+.ad-btn.secondary:hover {
+  background: #cccc00;
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(255,255,0,0.8);
+}
+
+.ad-btn.danger {
+  background: #ff0000;
+  color: white;
+}
+
+.ad-btn.danger:hover {
+  background: #cc0000;
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(255,0,0,0.8);
+}
+
+/* Random flashing elements */
+.app::after {
+  content: '';
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  background: red;
+  border-radius: 50%;
+  animation: flash 0.1s infinite;
+  pointer-events: none;
+}
+
+@keyframes flash {
+  0%, 50% { opacity: 0; }
+  51%, 100% { opacity: 1; }
+}
+
+/* Mobile responsiveness - but broken */
+@media (max-width: 768px) {
+  .main-content {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: 150px;
+  }
+
+  .youtube-shorts-panel {
+    width: 100%;
+    height: 300px;
+    margin-top: 10px;
+  }
+
+  .youtube-player iframe {
+    height: 250px;
+  }
+
+  .header-buttons {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .ad-modal {
+    width: 90%;
+    padding: 20px;
+  }
+}
+
+/* Extra terrible: random cursor changes */
+* {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='red'/%3E%3Ctext x='16' y='20' text-anchor='middle' fill='white' font-size='12'%3E💩%3C/text%3E%3C/svg%3E"), auto !important;
+}
