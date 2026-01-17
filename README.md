@@ -1,123 +1,208 @@
-# TERRIBLE IDE - The Most Distracting IDE Ever
+# Hackathon Project
 
-## ⚠️ WARNING ⚠️
-This IDE is intentionally terrible, aggressive, and designed to frustrate users. However, basic file operations DO work (most of the time). It will:
-- ✅ Create, save, and load files (with occasional random failures)
-- ✅ Let you write code (but may corrupt it randomly)
-- ✅ Run JavaScript code (but with terrible delays and failures)
-- ❌ Insult you constantly with popup messages
-- ❌ Show aggressive popup ads every 10 seconds
-- ❌ Play auto-changing YouTube Shorts to distract you from coding
-- ❌ Corrupt your files randomly (but you can still use them)
-- ❌ Change layouts unexpectedly (normal → chaos → upside-down → tiny text)
-- ❌ Randomly crash or break the editor
-- ❌ Hide your files sometimes
-- ❌ Use terrible colors, fonts, and animations
-- ❌ Mock your coding skills relentlessly
 
-## Features
 
-### ✅ Working Features (Most of the Time)
-- **File Creation**: Create new files (may be corrupted randomly)
-- **Code Writing**: Monaco editor works for writing code
-- **File Saving**: Save files (15% chance of random failure)
-- **File Loading**: Load and edit existing files
-- **Code Execution**: Run JavaScript code (15% chance of random failure)
-- **Basic CRUD**: Create, read, update, delete operations work
 
-### ❌ Terrible Features
-- **Aggressive Error Messages**: Every error comes with personal attacks
-- **Random File Corruption**: 20% chance your files get corrupted when saved
-- **Hidden Files**: Files randomly disappear from the file list (10% chance)
-- **Failed Operations**: Saves, deletes, updates, and code execution randomly fail (15% chance)
-- **Code Corruption**: Code may be randomly corrupted before execution (10% chance)
-- **YouTube Shorts Panel**: Auto-playing distracting videos on the side (shows error screen with YouTube links when videos fail)
-- **Server Crashes**: The backend can crash randomly (but usually doesn't)
+## Project Structure
 
-### Confusing UI
-- **Random Color Changes**: Background changes every 5 seconds
-- **Layout Chaos**: Interface rearranges itself randomly (normal, chaos, upside-down, tiny text, huge text)
-- **Terrible Fonts**: Comic Sans everywhere with rainbow animations
-- **YouTube Shorts Panel**: Third column with auto-playing distracting videos (with fallback to YouTube links)
-- **Broken Responsiveness**: Mobile view is even worse (videos still play)
-- **Flashing Elements**: Random blinking and shaking
 
-### Popup Ads
-- **Random Interruption**: Ads appear every 10 seconds (30% chance)
-- **Aggressive Marketing**: Fake ads for terrible products
-- **Multiple Ads**: Sometimes shows another ad immediately after closing
-- **Can't Be Disabled**: "Never show again" button doesn't work
-
-### Random Behavior
-- **Insult Banners**: Random insults appear every 15 seconds
-- **Cursor Changes**: Mouse cursor is a poop emoji everywhere
-- **Line Numbers**: May or may not show (randomly decided per editor)
-- **Editor Breaks**: Monaco editor randomly breaks after 30 seconds
-- **Execution Delays**: Code execution has random delays (0.5-2.5 seconds)
-- **YouTube Shorts**: Auto-playing distracting videos change every 15 seconds (40% chance), with error screens that still distract you
-- **Chaos Button**: Performs random destructive actions including rickrolling you
-
-## Installation
-
-```bash
-# Install all dependencies
-npm run install-all
-
-# Or install manually:
-npm install
-cd backend && npm install
-cd ../frontend && npm install
 ```
 
-## Running the Terrible IDE
-
-```bash
-# Start both frontend and backend
-npm start
-
-# Or run separately:
-# Terminal 1 - Backend
-npm run server
-
-# Terminal 2 - Frontend
-npm run client
+├── frontend/           # Client-side code
+│   ├── index.html      # Main HTML file
+│   ├── css/
+│   │   └── styles.css  # All styling (extracted from original HTML)
+│   ├── js/
+│   │   └── app.js      # All JavaScript functionality (extracted from original HTML)
+│   └── assets/         # Future assets (images, fonts, etc.)
+├── backend/            # Server-side code
+│   ├── server.js       # Express server to serve frontend files
+│   └── package.json    # Node.js dependencies
+├── main.html           # Original monolithic file (kept for reference)
+└── README.md           # This file
 ```
 
-The IDE will be available at `http://localhost:3000`
+## 🚀 Getting Started
 
-## API Endpoints
+### Prerequisites
+- Node.js (v14 or higher)
+- npm (comes with Node.js)
+- Gemini API key (optional, for AI code generation)
 
-The backend has intentionally terrible API responses:
+### Installation
 
-- `GET /api/files` - Lists files (some may be hidden)
-- `POST /api/files` - Creates files (may corrupt them)
-- `GET /api/files/:id` - Gets a specific file
-- `PUT /api/files/:id` - Updates a file (may fail randomly)
-- `DELETE /api/files/:id` - Deletes a file (may refuse)
-- `POST /api/run` - Executes JavaScript code (may fail or corrupt randomly)
-- `GET /api/status` - Shows terrible server status
-- `GET /api/crash` - 50% chance to crash the server
+1. **Clone or navigate to the project directory**
 
-## Database
 
-Uses SQLite with a terrible schema that includes:
-- Files table with corruption flags
-- User insults table for random messages
+2. **Install backend dependencies**
+   ```bash
+   cd backend
+   npm install
+   ```
 
-## Technologies Used
+3. **Set up Gemini AI (optional, for AI code generation)**
+   ```bash
+   # Get your API key from https://makersuite.google.com/app/apikey
+   # Create a .env file in the root directory
+   cp env.example .env
+   # Edit .env and add your GEMINI_API_KEY
+   ```
 
-- **Frontend**: React, Monaco Editor, Terrible CSS
-- **Backend**: Node.js, Express, SQLite
-- **Styling**: Pure CSS with animations and chaos
+3. **Start the server**
+   ```bash
+   npm start
+   ```
 
-## Contributing
+4. **Open your browser**
+   Navigate to: `http://localhost:3000`
 
-Please don't contribute to this project. It's supposed to be terrible.
+That's it! The IDE will load and you're ready to grind that code fr fr. 💀
 
-## License
+## 📄 File Creation
 
-MIT - But you probably shouldn't use this anyway.
+Create new files with **smart templates** based on file extension:
+
+- **`.js`** → JavaScript function template with console.log
+- **`.jsx`** → React component with hooks and PropTypes
+- **`.html`** → Complete HTML5 template with semantic structure
+- **`.css`** → Modern CSS framework with utilities and responsive design
+- **`.json`** → Package.json structure for Node.js projects
+- **`.md`** → README documentation template
+- **`.py`** → Python script template
+- **`.sql`** → SQL queries template
+- **And more!**
+
+## 🔥 Features
+
+### Core IDE Features
+- **Code Editor**: Syntax highlighting, line numbers, minimap
+- **File Management**: Create, rename, delete, and switch between files
+- **Auto-save**: Files are automatically saved every 5 seconds
+- **Persistent Storage**: All files are saved locally in your browser
+- **File Operations**: New, Open, Save files
+- **Undo/Redo**: Full history support
+- **Code Formatting**: Automatic indentation
+- **Find & Replace**: Search through your code
+- **Code Execution**: Run JavaScript directly in the browser
+
+
+### Distraction Features (Brain Rot Breaks) 📱
+- **YouTube Shorts**: Watch random viral shorts
+- **Instagram Reels**: Scroll through reels
+- **GIF Scroller**: Infinite random GIFs by category
+- **Reddit Browser**: Browse programming memes and posts
+- **Twitch Streams**: Watch live coding/game streams
+
+### AI Agents 🤖 (Requires Gemini API Key)
+- **Code Generator**: AI-powered code writing using Gemini 3 Flash Preview
+- **Debug Master**: Finds and explains bugs
+- **Code Optimizer**: Performance improvements
+- **Code Explainer**: Explains what code does
+- **Refactoring Pro**: Cleans up messy code
+- **Test Writer**: Generates unit tests
+- **Comment Generator**: Adds documentation
+- **Brainrot Coder**: Gives coding advice
+
+### Music & Vibes 🎵
+- **Spotify Player**: Integrated music player
+- **Lofi Beats**: Curated coding playlists
+- **Background Music**: Set the mood for grinding
+
+## 🛠️ Development
+
+### File Structure Details
+
+- **`frontend/index.html`**: Clean HTML with external CSS/JS references
+- **`frontend/css/styles.css`**: All styling extracted from original HTML
+- **`frontend/js/app.js`**: All JavaScript functionality extracted from original HTML
+- **`backend/server.js`**: Simple Express server for serving static files
+- **`backend/package.json`**: Node.js dependencies and scripts
+
+### Adding New Features
+
+1. **Frontend changes**: Edit files in the `frontend/` directory
+2. **Backend changes**: Modify `backend/server.js` if needed
+3. **Dependencies**: Add to `backend/package.json` if server-side packages needed
+
+### Building/Deployment
+
+Since this is a client-side application, you can:
+- Serve directly from any static file server
+- Deploy to Netlify, Vercel, or any static hosting
+- The backend server is optional - you can open `frontend/index.html` directly in a browser
+
+## 🎮 How to Use
+
+1. **Start coding**: Type in the editor area
+2. **Run code**: Click the ▶️ Run button to execute JavaScript
+3. **Take breaks**: Use the Brain Rot Break panel for "inspiration"
+4. **Create & manage files**: Use the file management system to create, rename, and delete files
+5. **Get AI help**: Use AI Agents for code assistance (requires Gemini API key)
+6. **Listen to music**: Open the Spotify player for coding vibes
+7. **Earn achievements**: Unlock sigma points by being productive
+
+## 📁 File Management
+
+The IDE now supports full file management with persistent storage:
+
+- **Create Files**: Click "📄 New" and enter a filename (e.g., `script.js`, `component.jsx`)
+- **Auto-templates**: New files come with appropriate templates based on file extension
+- **Persistent Storage**: All files are automatically saved to your browser's local storage
+- **File Operations**: Rename (✏️) and delete (🗑️) files using hover actions in the sidebar
+- **Auto-save**: Files are saved every 5 seconds automatically
+- **File Switching**: Click any file in the sidebar to switch between them
+
+Your files persist between browser sessions!
+
+## 🤖 Gemini AI Setup
+
+### Getting Your API Key
+1. Visit [Google AI Studio](https://makersuite.google.com/app/apikey)
+2. Sign in with your Google account
+3. Create a new API key
+4. Copy the API key
+
+### Configuration
+1. Create a `.env` file in the root directory:
+   ```bash
+   cp env.example .env
+   ```
+
+2. Edit the `.env` file and add your API key:
+   ```
+   GEMINI_API_KEY=your_actual_gemini_api_key_here
+   ```
+
+3. Restart the server:
+   ```bash
+   cd backend
+   npm start
+   ```
+
+### Testing AI Features
+- Open the IDE at `http://localhost:3000`
+- Click the 🤖 AI Agents button
+- Select "Code Generator" from the dropdown
+- Try generating some code!
+
+### Troubleshooting
+- **"Gemini API key not configured"**: Make sure your `.env` file has the correct API key
+- **"API request failed"**: Check your internet connection and API key validity
+- **"models/gemini-X.X-X is not found"**: The model might not be available. The code uses `'gemini-pro'` which should work. If issues persist, check your API key and Google AI Studio access.
+- **"No response generated"**: The AI might be having issues, try again later
+
+## 💀 Philosophy
+
+This IDE embraces the chaos of modern development. Sometimes you need to watch a YouTube short to clear your mind. Sometimes you need AI to write your code. Sometimes you need to scroll Reddit instead of debugging. We're so back. 🔥
+
+## 📝 License
+
+MIT License 
+
+## 🤝Contributing
+
+
 
 ---
 
-**Remember**: This IDE exists to demonstrate how NOT to design software. Use it to learn what terrible UX looks like, then go build something actually good!
+**Remember**: We're not in 2010 anymore fr. Use modern tools. 
