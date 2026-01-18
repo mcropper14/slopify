@@ -495,6 +495,12 @@
             document.getElementById('redditPanel').style.display = platform === 'reddit' ? 'block' : 'none';
             document.getElementById('twitchPanel').style.display = platform === 'twitch' ? 'block' : 'none';
             document.getElementById('terminalPanel').style.display = platform === 'terminal' ? 'block' : 'none';
+            document.getElementById('snakePanel').style.display = platform === 'snake' ? 'block' : 'none';
+
+            // Initialize Snake game when tabs are switched
+            if (platform === 'snake') {
+                setTimeout(initSnake, 100);
+            }
         }
 
         // YouTube Shorts embedding
@@ -1688,7 +1694,7 @@ console.log(testFunction());`,
                         'code.js': editor.value
                     }
                 },
-                'README.txt': 'Welcome to SkibidiIDE Terminal fr fr 💀'
+                'README.txt': 'Welcome to Slopify Terminal fr fr 💀'
             }
         };
         let currentPath = '/home/user';
@@ -1841,7 +1847,7 @@ console.log(testFunction());`,
         function clearTerminal() {
             const output = document.getElementById('terminalOutput');
             output.innerHTML = `
-                <div style="color: #858585;">SkibidiIDE Terminal v1.0.0</div>
+                <div style="color: #858585;">Slopify Terminal v1.0.0</div>
                 <div style="color: #858585;">Type 'help' for available commands fr fr 💀</div>
                 <div style="color: #858585;">---</div>
             `;
@@ -1866,6 +1872,177 @@ console.log(testFunction());`,
                 }
             }
         });
+
+        // Snake Game State
+        let snakeGame = {
+            canvas: null,
+            ctx: null,
+            snake: [],
+            food: {},
+            direction: 'right',
+            nextDirection: 'right',
+            score: 0,
+            highScore: 0,
+            gameLoop: null,
+            gridSize: 10,
+            tileCount: 20,
+            speed: 100,
+            running: false
+        };
+
+        // Initialize Snake Game
+        window.initSnake = function() {
+            snakeGame.canvas = document.getElementById('snakeCanvas');
+            if (!snakeGame.canvas) return;
+            snakeGame.ctx = snakeGame.canvas.getContext('2d');
+            snakeGame.highScore = parseInt(localStorage.getItem('snakeHighScore') || '0');
+            document.getElementById('snakeHigh').textContent = snakeGame.highScore;
+        };
+
+        // Start Game
+        window.startSnake = function() {
+            if (snakeGame.running) return;
+            // Initialize game state
+            snakeGame.snake = [
+                {x: 10, y: 10},
+                {x: 9, y: 10},
+                {x: 8, y: 10}
+            ];
+            snakeGame.direction = 'right';
+            snakeGame.nextDirection = 'right';
+            snakeGame.score = 0;
+            snakeGame.running = true;
+            document.getElementById('snakeScore').textContent = '0';
+            document.getElementById('snakeStartBtn').style.display = 'none';
+            document.getElementById('snakePauseBtn').style.display = 'block';
+            spawnFood();
+            snakeGame.gameLoop = setInterval(updateSnake, snakeGame.speed);
+        };
+
+        // Pause/Resume Game
+        window.pauseSnake = function() {
+            if (snakeGame.gameLoop) {
+                clearInterval(snakeGame.gameLoop);
+                snakeGame.gameLoop = null;
+                snakeGame.running = false;
+                document.getElementById('snakePauseBtn').textContent = '▶️ Resume';
+            } else {
+                snakeGame.gameLoop = setInterval(updateSnake, snakeGame.speed);
+                snakeGame.running = true;
+                document.getElementById('snakePauseBtn').textContent = '⏸️ Pause';
+            }
+        };
+
+        // Update Game State
+        function updateSnake() {
+            // Update direction
+            snakeGame.direction = snakeGame.nextDirection;
+
+            // Move snake
+            const head = {...snakeGame.snake[0]};
+            switch(snakeGame.direction) {
+                case 'up': head.y--; break;
+                case 'down': head.y++; break;
+                case 'left': head.x--; break;
+                case 'right': head.x++; break;
+            }
+
+            // Check wall collision
+            if (head.x < 0 || head.x >= snakeGame.tileCount || head.y < 0 || head.y >= snakeGame.tileCount) {
+                gameOver();
+                return;
+            }
+
+            // Check self collision
+            for (let segment of snakeGame.snake) {
+                if (head.x === segment.x && head.y === segment.y) {
+                    gameOver();
+                    return;
+                }
+            }
+
+            // Add new head
+            snakeGame.snake.unshift(head);
+
+            // Check food collision
+            if (head.x === snakeGame.food.x && head.y === snakeGame.food.y) {
+                snakeGame.score++;
+                document.getElementById('snakeScore').textContent = snakeGame.score;
+                spawnFood();
+                if (snakeGame.score > snakeGame.highScore) {
+                    snakeGame.highScore = snakeGame.score;
+                    document.getElementById('snakeHigh').textContent = snakeGame.highScore;
+                    localStorage.setItem('snakeHighScore', snakeGame.highScore);
+                }
+            } else {
+                snakeGame.snake.pop();
+            }
+
+            drawSnake();
+        }
+
+        // Spawn Food
+        function spawnFood() {
+            snakeGame.food = {
+                x: Math.floor(Math.random() * snakeGame.tileCount),
+                y: Math.floor(Math.random() * snakeGame.tileCount)
+            };
+        }
+
+        // Draw Game
+        function drawSnake() {
+            const ctx = snakeGame.ctx;
+            const size = snakeGame.gridSize;
+
+            // Clear canvas
+            ctx.fillStyle = '#000';
+            ctx.fillRect(0, 0, snakeGame.canvas.width, snakeGame.canvas.height);
+
+            // Draw snake
+            snakeGame.snake.forEach((segment, index) => {
+                ctx.fillStyle = index === 0 ? '#4caf50' : '#8bc34a';
+                ctx.fillRect(segment.x * size, segment.y * size, size - 1, size - 1);
+            });
+
+            // Draw food
+            ctx.fillStyle = '#f44336';
+            ctx.fillRect(snakeGame.food.x * size, snakeGame.food.y * size, size - 1, size - 1);
+        }
+
+        // Game Over
+        function gameOver() {
+            clearInterval(snakeGame.gameLoop);
+            snakeGame.gameLoop = null;
+            snakeGame.running = false;
+            document.getElementById('snakeStartBtn').style.display = 'block';
+            document.getElementById('snakePauseBtn').style.display = 'none';
+        }
+
+        // Keyboard Controls
+        document.addEventListener('keydown', (e) => {
+            if (!snakeGame.running) return;
+            switch(e.key) {
+                case 'ArrowUp':
+                    if (snakeGame.direction !== 'down') snakeGame.nextDirection = 'up';
+                    e.preventDefault();
+                    break;
+                case 'ArrowDown':
+                    if (snakeGame.direction !== 'up') snakeGame.nextDirection = 'down';
+                    e.preventDefault();
+                    break;
+                case 'ArrowLeft':
+                    if (snakeGame.direction !== 'right') snakeGame.nextDirection = 'left';
+                    e.preventDefault();
+                    break;
+                case 'ArrowRight':
+                    if (snakeGame.direction !== 'left') snakeGame.nextDirection = 'right';
+                    e.preventDefault();
+                    break;
+            }
+        });
+
+        // Initialize snake when page loads
+        setTimeout(initSnake, 100);
 
         // Auto-save every 5 seconds
         setInterval(saveCurrentFile, 5000);
