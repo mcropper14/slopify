@@ -87,6 +87,7 @@ Create new files with **smart templates** based on file extension:
 
 
 ### Distraction Features (Brain Rot Breaks) 📱
+- **Terminal**: Command-line interface with fun commands (Platform tab)
 - **YouTube Shorts**: Watch random viral shorts
 - **Instagram Reels**: Scroll through reels
 - **GIF Scroller**: Infinite random GIFs by category

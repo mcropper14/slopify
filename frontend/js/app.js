@@ -494,6 +494,7 @@
             document.getElementById('tenorPanel').style.display = platform === 'tenor' ? 'block' : 'none';
             document.getElementById('redditPanel').style.display = platform === 'reddit' ? 'block' : 'none';
             document.getElementById('twitchPanel').style.display = platform === 'twitch' ? 'block' : 'none';
+            document.getElementById('terminalPanel').style.display = platform === 'terminal' ? 'block' : 'none';
         }
 
         // YouTube Shorts embedding
@@ -1676,6 +1677,195 @@ console.log(testFunction());`,
         updateLineNumbers();
         updateStatusBar();
         updateSidebarFiles(); // Update sidebar with existing files
+
+        // Terminal System
+        let terminalHistory = [];
+        let historyIndex = -1;
+        let fileSystem = {
+            '/': {
+                'home': {
+                    'user': {
+                        'code.js': editor.value
+                    }
+                },
+                'README.txt': 'Welcome to SkibidiIDE Terminal fr fr 💀'
+            }
+        };
+        let currentPath = '/home/user';
+
+        function executeCommand() {
+            const input = document.getElementById('terminalInput');
+            const command = input.value.trim();
+
+            if (!command) return;
+
+            const output = document.getElementById('terminalOutput');
+
+            // Add command to output
+            const commandLine = document.createElement('div');
+            commandLine.style.color = '#4caf50';
+            commandLine.textContent = '$ ' + command;
+            output.appendChild(commandLine);
+
+            // Add to history
+            terminalHistory.push(command);
+            historyIndex = terminalHistory.length;
+
+            // Execute command
+            const result = processCommand(command);
+
+            // Add result to output
+            const resultLine = document.createElement('div');
+            resultLine.style.color = result.error ? '#f44336' : '#d4d4d4';
+            resultLine.innerHTML = result.output;
+            output.appendChild(resultLine);
+
+            // Scroll to bottom
+            output.scrollTop = output.scrollHeight;
+
+            // Clear input
+            input.value = '';
+        }
+
+        function processCommand(cmd) {
+            const parts = cmd.trim().split(' ');
+            const command = parts[0].toLowerCase();
+            const args = parts.slice(1);
+
+            switch(command) {
+                case 'help':
+                    return {
+                        output: `Available commands:
+<span style="color: #4caf50;">help</span> - Show this help message
+<span style="color: #4caf50;">clear</span> - Clear terminal
+<span style="color: #4caf50;">echo</span> [text] - Print text
+<span style="color: #4caf50;">date</span> - Show current date/time
+<span style="color: #4caf50;">whoami</span> - Show current user
+<span style="color: #4caf50;">pwd</span> - Print working directory
+<span style="color: #4caf50;">ls</span> - List files
+<span style="color: #4caf50;">cat</span> [file] - Show file content
+<span style="color: #4caf50;">code</span> - Show current editor code
+<span style="color: #4caf50;">run</span> - Execute editor code
+<span style="color: #4caf50;">cowsay</span> [text] - Cow says something
+<span style="color: #4caf50;">fortune</span> - Random quote
+<span style="color: #4caf50;">calc</span> [expression] - Calculator`,
+                        error: false
+                    };
+
+                case 'clear':
+                    clearTerminal();
+                    return { output: '', error: false };
+
+                case 'echo':
+                    return { output: args.join(' '), error: false };
+
+                case 'date':
+                    return { output: new Date().toString(), error: false };
+
+                case 'whoami':
+                    return { output: 'sigma-coder 💀', error: false };
+
+                case 'pwd':
+                    return { output: currentPath, error: false };
+
+                case 'ls':
+                    return { output: 'code.js  README.txt  docs/  src/', error: false };
+
+                case 'cat':
+                    if (!args[0]) {
+                        return { output: 'cat: missing file operand', error: true };
+                    }
+                    if (args[0] === 'code.js') {
+                        return { output: editor.value || '// Empty file', error: false };
+                    }
+                    return { output: `cat: ${args[0]}: No such file or directory`, error: true };
+
+                case 'code':
+                    return { output: editor.value || '// No code in editor', error: false };
+
+                case 'run':
+                    try {
+                        runCode();
+                        return { output: 'Code executed! Check console output below editor.', error: false };
+                    } catch (e) {
+                        return { output: 'Error: ' + e.message, error: true };
+                    }
+
+                case 'cowsay':
+                    const message = args.join(' ') || 'moo fr fr';
+                    return {
+                        output: `
+ ${'_'.repeat(message.length + 2)}
+< ${message} >
+ ${'-'.repeat(message.length + 2)}
+        \\   ^__^
+         \\  (oo)\\_______
+            (__)\\       )\\/\\
+                ||----w |
+                ||     ||`,
+                        error: false
+                    };
+
+                case 'fortune':
+                    const fortunes = [
+                        'Your code will compile on the first try (cap) 💀',
+                        'A bug-free day awaits you... jk fr fr',
+                        'Stack Overflow has the answer you seek 📚',
+                        'Today is a good day to refactor 🔧',
+                        'Your pull request will be approved (trust) ✅',
+                        'The sigma grindset leads to better code 👑',
+                        'Console.log is your best friend no cap 🤝',
+                        'Rubber duck debugging > AI fr fr 🦆'
+                    ];
+                    return { output: fortunes[Math.floor(Math.random() * fortunes.length)], error: false };
+
+                case 'calc':
+                    if (!args[0]) {
+                        return { output: 'Usage: calc [expression]', error: true };
+                    }
+                    try {
+                        const result = eval(args.join(' '));
+                        return { output: `= ${result}`, error: false };
+                    } catch (e) {
+                        return { output: 'Invalid expression', error: true };
+                    }
+
+                case '':
+                    return { output: '', error: false };
+
+                default:
+                    return { output: `Command not found: ${command}. Type 'help' for available commands.`, error: true };
+            }
+        }
+
+        function clearTerminal() {
+            const output = document.getElementById('terminalOutput');
+            output.innerHTML = `
+                <div style="color: #858585;">SkibidiIDE Terminal v1.0.0</div>
+                <div style="color: #858585;">Type 'help' for available commands fr fr 💀</div>
+                <div style="color: #858585;">---</div>
+            `;
+        }
+
+        // Terminal keyboard shortcuts
+        document.getElementById('terminalInput').addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                if (historyIndex > 0) {
+                    historyIndex--;
+                    document.getElementById('terminalInput').value = terminalHistory[historyIndex];
+                }
+            } else if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                if (historyIndex < terminalHistory.length - 1) {
+                    historyIndex++;
+                    document.getElementById('terminalInput').value = terminalHistory[historyIndex];
+                } else {
+                    historyIndex = terminalHistory.length;
+                    document.getElementById('terminalInput').value = '';
+                }
+            }
+        });
 
         // Auto-save every 5 seconds
         setInterval(saveCurrentFile, 5000);
