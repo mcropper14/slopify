@@ -18,7 +18,7 @@
 ├── backend/            # Server-side code
 │   ├── server.js       # Express server to serve frontend files
 │   └── package.json    # Node.js dependencies
-├── main.html           # Original monolithic file (kept for reference)
+├── main.html           # old file
 └── README.md           # This file
 ```
 
