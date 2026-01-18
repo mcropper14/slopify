@@ -90,17 +90,12 @@ Create new files with **smart templates** based on file extension:
 - **Terminal**: Command-line interface with fun commands (Platform tab)
 - **YouTube Shorts**: Watch random viral shorts
 - **Instagram Reels**: Scroll through reels
-- **GIF Scroller**: Infinite random GIFs by category
+- **GIF Scroller**: Infinite random GIFs by category (pre-defined right now)
 - **Reddit Browser**: Browse programming memes and posts
 - **Twitch Streams**: Watch live coding/game streams
 
 ### AI Agents 🤖 (Requires Gemini API Key)
 - **Code Generator**: AI-powered code writing using Gemini 3 Flash Preview
-- **Debug Master**: Finds and explains bugs
-- **Code Optimizer**: Performance improvements
-- **Code Explainer**: Explains what code does
-- **Refactoring Pro**: Cleans up messy code
-- **Test Writer**: Generates unit tests
 - **Comment Generator**: Adds documentation
 - **Brainrot Coder**: Gives coding advice
 
