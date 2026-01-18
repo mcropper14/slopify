@@ -84,6 +84,7 @@ Create new files with **smart templates** based on file extension:
 - **Code Formatting**: Automatic indentation
 - **Find & Replace**: Search through your code
 - **Code Execution**: Run JavaScript directly in the browser
+- works
 
 
 ### Distraction Features (Brain Rot Breaks) 📱
@@ -113,12 +114,14 @@ Create new files with **smart templates** based on file extension:
 - **`frontend/js/app.js`**: All JavaScript functionality extracted from original HTML
 - **`backend/server.js`**: Simple Express server for serving static files
 - **`backend/package.json`**: Node.js dependencies and scripts
+- these are probably wrong lmao
 
 ### Adding New Features
 
 1. **Frontend changes**: Edit files in the `frontend/` directory
 2. **Backend changes**: Modify `backend/server.js` if needed
 3. **Dependencies**: Add to `backend/package.json` if server-side packages needed
+4. We aren't adding these lol
 
 ### Building/Deployment
 
